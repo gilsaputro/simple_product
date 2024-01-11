@@ -8,12 +8,12 @@ deps-init:
 deps-tear:
 	@docker-compose down --volumes --remove-orphans
 
-.PHONY: upgrade
-upgrade:
+.PHONY: migrate-up
+migrate-up:
 	@bash ./scripts/migrate.sh upgrade
 
-.PHONY: downgrade
-downgrade:
+.PHONY: migrate-down
+migrate-down:
 	@bash ./scripts/migrate.sh downgrade
 
 .PHONY: run-local
