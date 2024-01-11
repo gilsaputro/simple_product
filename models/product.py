@@ -3,6 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
 
 BaseProduct = declarative_base()
+import string
 class Product(BaseProduct):
     __tablename__ = 'products'
 

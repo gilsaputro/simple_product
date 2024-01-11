@@ -1,8 +1,9 @@
 import os
 from flask import Flask
 from cmd.config.load import get_config
-from pkg.postgres.client import Database
+from pkg.postgres.client import DatabaseClient
 from pkg.vault.client import VaultClient
+from pkg.redis.client import RedisClient
 from datetime import datetime
 from dotenv import load_dotenv
 from internal.repository.product.product_repository import ProductRepository
@@ -33,8 +34,14 @@ def create_server():
     # Init Database
     loader("Init Database Connection Started")
     print(cfg.Postgres.Config)
-    db = Database(cfg.Postgres.Config)
+    db = DatabaseClient(cfg.Postgres.Config)
     loader("Init Database Connection Completed")
+    
+    # Init Redis
+    loader("Init Redis Connection Started")
+    print(cfg.Postgres.Config)
+    cache = RedisClient(cfg.Redis.Host, cfg.Redis.Port, cfg.Redis.Password)
+    loader("Init Redis Connection Completed")
     
      # Init Repository
     loader("Init Repository Started")
@@ -43,7 +50,7 @@ def create_server():
     
     # Init Usecase
     loader("Init Usecase Started")
-    product_usecase = ProductUseCase(product_repository)
+    product_usecase = ProductUseCase(product_repository, cache)
     loader("Init Usecase Completed")
     
     # Init Usecase

@@ -13,9 +13,8 @@ class Postgres():
 class Redis():
     def __init__(self, yaml_data):
         self.Password = yaml_data.get('redis_password', None)
-        self.Host =  yaml_data.get('redis_password', None)
-        self.MaxIdle =  yaml_data.get('max_idle_in_sec', None)
-        self.IdleTimeoutInSec =  yaml_data.get('idle_timeout_in_sec', None)
+        self.Host =  yaml_data.get('host', None)
+        self.Port =  yaml_data.get('port', None)
 
 def get_config(values):
     # Read the YAML file into a dictionary

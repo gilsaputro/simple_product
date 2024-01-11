@@ -1,4 +1,5 @@
 from flask import jsonify, request
+from internal.usecase.product.error import *
 
 class ProductController:
     def __init__(self, product_usecase):
@@ -38,41 +39,33 @@ class ProductController:
         try:
             product = self.product_usecase.create_product(product_name, price, description, quantity)
             if product:
-                return jsonify(self.serialize_product(product))
+                return jsonify(product)
             else:
                 return jsonify({"error": "Failed to create product"}), 400
         except Exception as e:
+            if isinstance(e, DuplicateProductError):
+                return jsonify({"error": str(e)}), 409
             return jsonify({"error": str(e)}), 500
             
     def get_product(self, product_id):
         try:
             product = self.product_usecase.get_product(product_id)
             if product:
-                return jsonify(self.serialize_product(product))
+                return jsonify(product)
             else:
                 return jsonify({"error": "Product not found"}), 404
         except Exception as e:
+            if isinstance(e, ProductNotFoundError):
+                return jsonify({"error": str(e)}), 404
             return jsonify({"error": str(e)}), 500
 
     def get_all_products(self):
         sort_by = request.args.get('sort_by', default="created_time")
         is_ascending = request.args.get('is_ascending', default=True, type=bool)
-        
-        valid_sort_fields = ['product_name', 'price', 'quantity', 'created_time']
-        if sort_by not in valid_sort_fields:
-            return jsonify({'error': 'Invalid sort_by field.'}), 400
         try:
             products = self.product_usecase.get_all_products(sort_by, is_ascending)
-            return jsonify([self.serialize_product(product) for product in products])
+            return jsonify(products)
         except Exception as e:
+            if isinstance(e, SortFieldIsNotValidError):
+                return jsonify({"error": str(e)}), 400
             return jsonify({"error": str(e)}), 500
-    
-    def serialize_product(self, product):
-        return {
-            "product_id": product.id,
-            "product_name": product.name,
-            "created_time": product.created_time,
-            'price': product.price,
-            'description': product.description,
-            'quantity': product.quantity
-        }
