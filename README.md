@@ -118,7 +118,7 @@ make run-local
 ### Postman Collection
 You can import postman collection in Repo File with Name : 
 ```
-Aquafarm Management System.postman_collection.json
+Simple Apps.postman_collection
 ```
 
 Note: The details mentioned in these steps may vary depending on your configuration.

@@ -1,0 +1,672 @@
+{
+	"info": {
+		"_postman_id": "6e45b103-87f7-4ba8-afa9-b26a464d5ad7",
+		"name": "Simple Apps",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28395270"
+	},
+	"item": [
+		{
+			"name": "Create Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"product_name\": \"New Product\",\n  \"price\": 20.0,\n  \"description\": \"Product Description\",\n  \"quantity\": 100\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"product_name\": \"New Product\",\r\n  \"price\": 20.0,\r\n  \"description\": \"Product Description\",\r\n  \"quantity\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 08:36:21 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "173"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"created_time\": \"01/11/2024, 08:36:21\",\n    \"description\": \"Product Description\",\n    \"price\": 20,\n    \"product_id\": 1,\n    \"product_name\": \"New Product\",\n    \"quantity\": 100\n}"
+				},
+				{
+					"name": "Error Duplicate",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"product_name\": \"New Product\",\n  \"price\": 20.0,\n  \"description\": \"Product Description\",\n  \"quantity\": 100\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "CONFLICT",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 08:36:33 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "71"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"A product with the name 'New Product' already exists.\"\n}"
+				},
+				{
+					"name": "Bad Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"price\": 20.0,\n  \"description\": \"Product Description\",\n  \"quantity\": 100\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 08:36:56 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "70"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Incomplete data. Please provide all required fields.\"\n}"
+				},
+				{
+					"name": "Invalid JSON",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 08:37:54 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "57"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Invalid request. JSON data is required.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Product By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 08:39:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "173"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"created_time\": \"01/11/2024, 08:36:21\",\n    \"description\": \"Product Description\",\n    \"price\": 20,\n    \"product_id\": 1,\n    \"product_name\": \"New Product\",\n    \"quantity\": 100\n}"
+				},
+				{
+					"name": "Product Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 08:32:29 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Product is not exists.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get List Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/products?sort_by=created_time&is_ascending=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "sort_by",
+							"value": "created_time"
+						},
+						{
+							"key": "is_ascending",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success sort by price",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/products?sort_by=price&is_ascending=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "sort_by",
+									"value": "price"
+								},
+								{
+									"key": "is_ascending",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 08:57:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "576"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"created_time\": \"01/11/2024, 08:40:30\",\n        \"description\": \"Product Description\",\n        \"price\": 30,\n        \"product_id\": 3,\n        \"product_name\": \"New Product#2\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:36:21\",\n        \"description\": \"Product Description\",\n        \"price\": 20,\n        \"product_id\": 1,\n        \"product_name\": \"New Product\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:39:15\",\n        \"description\": \"Product Description\",\n        \"price\": 5,\n        \"product_id\": 2,\n        \"product_name\": \"New Product#1\",\n        \"quantity\": 100\n    }\n]"
+				},
+				{
+					"name": "Success sort by name",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/products?sort_by=product_name&is_ascending=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "sort_by",
+									"value": "product_name"
+								},
+								{
+									"key": "is_ascending",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 08:55:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "576"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"created_time\": \"01/11/2024, 08:36:21\",\n        \"description\": \"Product Description\",\n        \"price\": 20,\n        \"product_id\": 1,\n        \"product_name\": \"New Product\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:39:15\",\n        \"description\": \"Product Description\",\n        \"price\": 5,\n        \"product_id\": 2,\n        \"product_name\": \"New Product#1\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:40:30\",\n        \"description\": \"Product Description\",\n        \"price\": 30,\n        \"product_id\": 3,\n        \"product_name\": \"New Product#2\",\n        \"quantity\": 100\n    }\n]"
+				},
+				{
+					"name": "Success sort by time",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/products?sort_by=created_time&is_ascending=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "sort_by",
+									"value": "created_time"
+								},
+								{
+									"key": "is_ascending",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 08:55:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "576"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"created_time\": \"01/11/2024, 08:40:30\",\n        \"description\": \"Product Description\",\n        \"price\": 30,\n        \"product_id\": 3,\n        \"product_name\": \"New Product#2\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:39:15\",\n        \"description\": \"Product Description\",\n        \"price\": 5,\n        \"product_id\": 2,\n        \"product_name\": \"New Product#1\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:36:21\",\n        \"description\": \"Product Description\",\n        \"price\": 20,\n        \"product_id\": 1,\n        \"product_name\": \"New Product\",\n        \"quantity\": 100\n    }\n]"
+				},
+				{
+					"name": "Product Not Found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/products?sort_by=product_name",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "sort_by",
+									"value": "product_name"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 08:34:54 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Product is not exists.\"\n}"
+				},
+				{
+					"name": "Invalid Sort Value",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/products?sort_by=distance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "sort_by",
+									"value": "distance"
+								}
+							]
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 08:35:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Invalid sort_by field.\"\n}"
+				}
+			]
+		}
+	]
+}

@@ -61,11 +61,14 @@ class ProductController:
 
     def get_all_products(self):
         sort_by = request.args.get('sort_by', default="created_time")
-        is_ascending = request.args.get('is_ascending', default=True, type=bool)
+        is_ascending = request.args.get('is_ascending', default="True", type=str)
+        is_ascending = is_ascending.lower() == "true"
         try:
             products = self.product_usecase.get_all_products(sort_by, is_ascending)
             return jsonify(products)
         except Exception as e:
             if isinstance(e, SortFieldIsNotValidError):
                 return jsonify({"error": str(e)}), 400
+            elif isinstance(e, ProductNotFoundError):
+                return jsonify({"error": str(e)}), 404
             return jsonify({"error": str(e)}), 500

@@ -70,7 +70,7 @@ class ProductUseCase:
                 # set payload to redis for list key
                 self.cache.setx(cache_key,compressed_payload,ExpiredTimeListData)
                 return payload
-        return ProductNotFoundError()
+        raise ProductNotFoundError()
 
         
     def serialize_product(self, product):
