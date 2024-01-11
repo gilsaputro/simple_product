@@ -118,6 +118,12 @@ or
 make run-local
 ```
 
+### Runing Unit Test
+You can run unit test in Repo with : 
+```
+make test
+```
+
 
 ### Postman Collection
 You can import postman collection in Repo File with Name : 

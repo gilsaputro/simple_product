@@ -19,3 +19,7 @@ migrate-down:
 .PHONY: run-local
 run-local:
 	python app.py
+
+.PHONY: test
+test:
+	python -m unittest discover -p '*_test.py'

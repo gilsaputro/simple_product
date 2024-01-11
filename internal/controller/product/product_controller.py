@@ -1,29 +1,23 @@
 from flask import jsonify, request
 from internal.usecase.product.error import *
+import json
 
 class ProductController:
     def __init__(self, product_usecase):
         self.product_usecase = product_usecase
-    
-    def define_routes(self, app):
-        app.add_url_rule('/products', 'create_product', self.create_product, methods=['POST'])
-        app.add_url_rule('/products/<int:product_id>', 'get_product', self.get_product, methods=['GET'])
-        app.add_url_rule('/products', 'get_all_products', self.get_all_products, methods=['GET'])
-        return app
 
     def create_product(self):
         data = request.get_json()
-        
         if not data:
             return jsonify({'error': 'Invalid request. JSON data is required.'}), 400
         
-        product_name = data.get('product_name')
+        name = data.get('name')
         price = data.get('price')
         description = data.get('description')
         quantity = data.get('quantity')
         
         # validate request value
-        if not all([product_name, price, quantity]):
+        if not all([name, price, quantity]):
             return jsonify({'error': 'Incomplete data. Please provide all required fields.'}), 400
 
         try:
@@ -37,7 +31,7 @@ class ProductController:
             return jsonify({'error': 'Price and quantity must be greater than or equal to 0.'}), 400
 
         try:
-            product = self.product_usecase.create_product(product_name, price, description, quantity)
+            product = self.product_usecase.create_product(name, price, description, quantity)
             if product:
                 return jsonify(product)
             else:
@@ -72,3 +66,9 @@ class ProductController:
             elif isinstance(e, ProductNotFoundError):
                 return jsonify({"error": str(e)}), 404
             return jsonify({"error": str(e)}), 500
+    
+    def define_routes(self, app):
+        app.add_url_rule('/products', 'create_product', self.create_product, methods=['POST'])
+        app.add_url_rule('/products/<int:product_id>', 'get_product', self.get_product, methods=['GET'])
+        app.add_url_rule('/products', 'get_all_products', self.get_all_products, methods=['GET'])
+        return app

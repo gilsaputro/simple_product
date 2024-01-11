@@ -1,6 +1,7 @@
 from internal.usecase.product.error import *
 import json
 import gzip
+from internal.usecase.product.error import DuplicateProductError, ProductNotFoundError, SortFieldIsNotValidError
 
 ExpiredTimeGetData = 60 * 60 
 ExpiredTimeListData = 60 * 2 
@@ -9,14 +10,14 @@ class ProductUseCase:
         self.product_repository = product_repository
         self.cache = cache
 
-    def create_product(self, product_name, price, description, quantity):
-        filter_criteria = {"name": product_name}
+    def create_product(self, name, price, description, quantity):
+        filter_criteria = {"name": name}
         count = self.product_repository.count_products_with_filter(filter_criteria)
         if count > 0 :
-            raise DuplicateProductError(product_name)
+            raise DuplicateProductError(name)
         
         # create product
-        product = self.product_repository.create_product(product_name, price, description, quantity)
+        product = self.product_repository.create_product(name, price, description, quantity)
         if product:
             # compress payload
             cache_key = generate_cache_key_by_id(product.id)
@@ -31,7 +32,7 @@ class ProductUseCase:
         cache_key = generate_cache_key_by_id(product_id)
         # check to cache
         products = self.cache.get(cache_key)
-        if products:
+        if products and len(products) > 0:
             #decompress payload
             payload = gzip.decompress(products)
             return json.loads(payload)
@@ -49,14 +50,14 @@ class ProductUseCase:
 
     def get_all_products(self, sort_by, is_ascending):
         # checking sort file
-        valid_sort_fields = ['product_name', 'price', 'created_time']
+        valid_sort_fields = ['name', 'price', 'created_time']
         if sort_by not in valid_sort_fields:
             raise SortFieldIsNotValidError()
         
         cache_key = generate_cache_key_by_filter(sort_by, is_ascending)
         # check to cache
         products = self.cache.get(cache_key)
-        if products:
+        if products and len(products) > 0:
             #decompress payload
             payload = gzip.decompress(products)
             return json.loads(payload)
@@ -76,7 +77,7 @@ class ProductUseCase:
     def serialize_product(self, product):
         return {
             "product_id": product.id,
-            "product_name": product.name,
+            "name": product.name,
             "created_time": product.created_time.strftime("%m/%d/%Y, %H:%M:%S"),
             'price': product.price,
             'description': product.description,
@@ -94,7 +95,7 @@ def generate_cache_key_by_filter(sort_by, is_ascending):
     
     sort_type = 0
     match sort_by:
-        case "product_name":
+        case "name":
             sort_type = 1
         case "price":
             sort_type = 2

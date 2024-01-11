@@ -18,7 +18,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"product_name\": \"New Product\",\n  \"price\": 20.0,\n  \"description\": \"Product Description\",\n  \"quantity\": 100\n}"
+					"raw": "{\n  \"name\": \"New Product#2\",\n  \"price\": 30.0,\n  \"description\": \"Product Description\",\n  \"quantity\": 100\n}"
 				},
 				"url": {
 					"raw": "http://localhost:5000/products",
@@ -40,19 +40,12 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"product_name\": \"New Product\",\r\n  \"price\": 20.0,\r\n  \"description\": \"Product Description\",\r\n  \"quantity\": 100\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"raw": "{\n  \"name\": \"New Product#2\",\n  \"price\": 30.0,\n  \"description\": \"Product Description\",\n  \"quantity\": 100\n}"
 						},
 						"url": {
 							"raw": "http://localhost:5000/products",
@@ -76,7 +69,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 11 Jan 2024 08:36:21 GMT"
+							"value": "Thu, 11 Jan 2024 12:12:26 GMT"
 						},
 						{
 							"key": "Content-Type",
@@ -84,7 +77,7 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "173"
+							"value": "167"
 						},
 						{
 							"key": "Connection",
@@ -92,7 +85,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"created_time\": \"01/11/2024, 08:36:21\",\n    \"description\": \"Product Description\",\n    \"price\": 20,\n    \"product_id\": 1,\n    \"product_name\": \"New Product\",\n    \"quantity\": 100\n}"
+					"body": "{\n    \"created_time\": \"01/11/2024, 12:12:26\",\n    \"description\": \"Product Description\",\n    \"name\": \"New Product#2\",\n    \"price\": 30,\n    \"product_id\": 3,\n    \"quantity\": 100\n}"
 				},
 				{
 					"name": "Error Duplicate",
@@ -305,7 +298,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 11 Jan 2024 08:39:35 GMT"
+							"value": "Thu, 11 Jan 2024 12:13:00 GMT"
 						},
 						{
 							"key": "Content-Type",
@@ -313,7 +306,7 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "173"
+							"value": "165"
 						},
 						{
 							"key": "Connection",
@@ -321,7 +314,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"created_time\": \"01/11/2024, 08:36:21\",\n    \"description\": \"Product Description\",\n    \"price\": 20,\n    \"product_id\": 1,\n    \"product_name\": \"New Product\",\n    \"quantity\": 100\n}"
+					"body": "{\n    \"created_time\": \"01/11/2024, 12:12:09\",\n    \"description\": \"Product Description\",\n    \"name\": \"New Product\",\n    \"price\": 20,\n    \"product_id\": 1,\n    \"quantity\": 100\n}"
 				},
 				{
 					"name": "Product Not Found",
@@ -377,7 +370,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/products?sort_by=created_time&is_ascending=true",
+					"raw": "http://localhost:5000/products?sort_by=name&is_ascending=true",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -389,7 +382,7 @@
 					"query": [
 						{
 							"key": "sort_by",
-							"value": "created_time"
+							"value": "name"
 						},
 						{
 							"key": "is_ascending",
@@ -400,12 +393,12 @@
 			},
 			"response": [
 				{
-					"name": "Success sort by price",
+					"name": "Success By Price",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/products?sort_by=price&is_ascending=false",
+							"raw": "http://localhost:5000/products?sort_by=price&is_ascending=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -418,61 +411,6 @@
 								{
 									"key": "sort_by",
 									"value": "price"
-								},
-								{
-									"key": "is_ascending",
-									"value": "false"
-								}
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Server",
-							"value": "Werkzeug/3.0.1 Python/3.11.2"
-						},
-						{
-							"key": "Date",
-							"value": "Thu, 11 Jan 2024 08:57:39 GMT"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "Content-Length",
-							"value": "576"
-						},
-						{
-							"key": "Connection",
-							"value": "close"
-						}
-					],
-					"cookie": [],
-					"body": "[\n    {\n        \"created_time\": \"01/11/2024, 08:40:30\",\n        \"description\": \"Product Description\",\n        \"price\": 30,\n        \"product_id\": 3,\n        \"product_name\": \"New Product#2\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:36:21\",\n        \"description\": \"Product Description\",\n        \"price\": 20,\n        \"product_id\": 1,\n        \"product_name\": \"New Product\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:39:15\",\n        \"description\": \"Product Description\",\n        \"price\": 5,\n        \"product_id\": 2,\n        \"product_name\": \"New Product#1\",\n        \"quantity\": 100\n    }\n]"
-				},
-				{
-					"name": "Success sort by name",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5000/products?sort_by=product_name&is_ascending=true",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"products"
-							],
-							"query": [
-								{
-									"key": "sort_by",
-									"value": "product_name"
 								},
 								{
 									"key": "is_ascending",
@@ -491,7 +429,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 11 Jan 2024 08:55:07 GMT"
+							"value": "Thu, 11 Jan 2024 12:14:22 GMT"
 						},
 						{
 							"key": "Content-Type",
@@ -499,7 +437,7 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "576"
+							"value": "553"
 						},
 						{
 							"key": "Connection",
@@ -507,15 +445,70 @@
 						}
 					],
 					"cookie": [],
-					"body": "[\n    {\n        \"created_time\": \"01/11/2024, 08:36:21\",\n        \"description\": \"Product Description\",\n        \"price\": 20,\n        \"product_id\": 1,\n        \"product_name\": \"New Product\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:39:15\",\n        \"description\": \"Product Description\",\n        \"price\": 5,\n        \"product_id\": 2,\n        \"product_name\": \"New Product#1\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:40:30\",\n        \"description\": \"Product Description\",\n        \"price\": 30,\n        \"product_id\": 3,\n        \"product_name\": \"New Product#2\",\n        \"quantity\": 100\n    }\n]"
+					"body": "[\n    {\n        \"created_time\": \"01/11/2024, 12:12:20\",\n        \"description\": \"Product Description\",\n        \"name\": \"New Product#1\",\n        \"price\": 10,\n        \"product_id\": 2,\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 12:12:09\",\n        \"description\": \"Product Description\",\n        \"name\": \"New Product\",\n        \"price\": 20,\n        \"product_id\": 1,\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 12:12:26\",\n        \"description\": \"Product Description\",\n        \"name\": \"New Product#2\",\n        \"price\": 30,\n        \"product_id\": 3,\n        \"quantity\": 100\n    }\n]"
 				},
 				{
-					"name": "Success sort by time",
+					"name": "Success By Name",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/products?sort_by=created_time&is_ascending=false",
+							"raw": "http://localhost:5000/products?sort_by=name&is_ascending=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "sort_by",
+									"value": "name"
+								},
+								{
+									"key": "is_ascending",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Werkzeug/3.0.1 Python/3.11.2"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jan 2024 12:13:55 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "553"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"created_time\": \"01/11/2024, 12:12:09\",\n        \"description\": \"Product Description\",\n        \"name\": \"New Product\",\n        \"price\": 20,\n        \"product_id\": 1,\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 12:12:20\",\n        \"description\": \"Product Description\",\n        \"name\": \"New Product#1\",\n        \"price\": 10,\n        \"product_id\": 2,\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 12:12:26\",\n        \"description\": \"Product Description\",\n        \"name\": \"New Product#2\",\n        \"price\": 30,\n        \"product_id\": 3,\n        \"quantity\": 100\n    }\n]"
+				},
+				{
+					"name": "Success By Time",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/products?sort_by=created_time&is_ascending=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -531,7 +524,7 @@
 								},
 								{
 									"key": "is_ascending",
-									"value": "false"
+									"value": "true"
 								}
 							]
 						}
@@ -546,7 +539,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Thu, 11 Jan 2024 08:55:57 GMT"
+							"value": "Thu, 11 Jan 2024 12:13:21 GMT"
 						},
 						{
 							"key": "Content-Type",
@@ -554,7 +547,7 @@
 						},
 						{
 							"key": "Content-Length",
-							"value": "576"
+							"value": "553"
 						},
 						{
 							"key": "Connection",
@@ -562,7 +555,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "[\n    {\n        \"created_time\": \"01/11/2024, 08:40:30\",\n        \"description\": \"Product Description\",\n        \"price\": 30,\n        \"product_id\": 3,\n        \"product_name\": \"New Product#2\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:39:15\",\n        \"description\": \"Product Description\",\n        \"price\": 5,\n        \"product_id\": 2,\n        \"product_name\": \"New Product#1\",\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 08:36:21\",\n        \"description\": \"Product Description\",\n        \"price\": 20,\n        \"product_id\": 1,\n        \"product_name\": \"New Product\",\n        \"quantity\": 100\n    }\n]"
+					"body": "[\n    {\n        \"created_time\": \"01/11/2024, 12:12:09\",\n        \"description\": \"Product Description\",\n        \"name\": \"New Product\",\n        \"price\": 20,\n        \"product_id\": 1,\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 12:12:20\",\n        \"description\": \"Product Description\",\n        \"name\": \"New Product#1\",\n        \"price\": 10,\n        \"product_id\": 2,\n        \"quantity\": 100\n    },\n    {\n        \"created_time\": \"01/11/2024, 12:12:26\",\n        \"description\": \"Product Description\",\n        \"name\": \"New Product#2\",\n        \"price\": 30,\n        \"product_id\": 3,\n        \"quantity\": 100\n    }\n]"
 				},
 				{
 					"name": "Product Not Found",
@@ -570,7 +563,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/products?sort_by=product_name",
+							"raw": "http://localhost:5000/products?sort_by=name",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -582,7 +575,7 @@
 							"query": [
 								{
 									"key": "sort_by",
-									"value": "product_name"
+									"value": "name"
 								}
 							]
 						}
