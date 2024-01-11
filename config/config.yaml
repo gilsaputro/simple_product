@@ -1,0 +1,7 @@
+postgres :
+  config : <postgres_config>
+redis :
+  redis_password : <redis_password>
+  redis_host : localhost:6379
+  max_idle_in_sec : 600
+  idle_timeout_in_sec : 1

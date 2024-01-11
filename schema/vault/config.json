@@ -1,0 +1,6 @@
+{
+    "data" : {
+        "redis_password" : "redislocal",
+        "postgres_config" : "postgresql://postgres:postgres@localhost:5492/productdatabase"
+    }
+}
