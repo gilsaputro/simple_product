@@ -7,3 +7,4 @@ PyYAML==6.0.1
 Requests==2.31.0
 SQLAlchemy==2.0.25
 redis==5.0.1
+psycopg2==2.9.9
