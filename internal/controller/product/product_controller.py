@@ -21,7 +21,6 @@ class ProductController:
         description = data.get('description')
         quantity = data.get('quantity')
         
-        print("product_name:",product_name)
         # validate request value
         if not all([product_name, price, quantity]):
             return jsonify({'error': 'Incomplete data. Please provide all required fields.'}), 400
