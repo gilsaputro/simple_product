@@ -1,6 +1,10 @@
 # Simple-Product-Apps
 This repository contains the prototype for an Simple Product Application.
 
+## High-Level Design (HLD)
+For a detailed understanding of the system architecture and design, please refer to the [High-Level Design (HLD)](https://github.com/gilsaputro/simple_product/wiki) document.
+
+
 ## Getting Started
 These intruction will get you a project and how to run the binary on your local machine.
 
