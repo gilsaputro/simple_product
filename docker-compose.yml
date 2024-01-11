@@ -34,7 +34,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=productdatabase
+      - POSTGRES_DB=product
     logging:
       options:
         max-size: 10m

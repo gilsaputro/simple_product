@@ -100,7 +100,7 @@ This command will:
 ### Running Binary:
 Once you have cloned the repository and set up all the dependencies, you can run the binary using either of the following methods:
 
-Note: If you have change the docker config please change the config in /config/config.yaml before run it
+Note: If you have change the docker config please change the config in /config/config.yaml and /schema/vault/config.json before run it
 
 And run using :
 

@@ -7,6 +7,27 @@ from alembic import context
 
 from models.product import BaseProduct
 
+import os
+from pkg.vault.client import VaultClient
+from dotenv import load_dotenv
+
+def get_postgres_config():
+     # Load environment variables from .env file
+    load_dotenv()
+
+    # Retrieve values from environment variables
+    vault_token = os.getenv("VAULT_TOKEN")
+    vault_address = os.getenv("VAULT_HOST")
+    
+    vault = VaultClient(vault_token, vault_address)
+    secret_values = vault.get_config()
+    if not secret_values:
+        print(f"Failed init vault")
+        return
+    
+    config = secret_values["postgres_config"]
+    return config
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -15,6 +36,10 @@ config = context.config
 # This line sets up loggers basically.
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
+
+pg_config = get_postgres_config()
+if pg_config:
+    config.set_main_option('sqlalchemy.url', pg_config)
 
 # add your model's MetaData object here
 # for 'autogenerate' support

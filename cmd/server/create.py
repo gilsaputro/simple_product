@@ -33,13 +33,11 @@ def create_server():
     
     # Init Database
     loader("Init Database Connection Started")
-    print(cfg.Postgres.Config)
     db = DatabaseClient(cfg.Postgres.Config)
     loader("Init Database Connection Completed")
     
     # Init Redis
     loader("Init Redis Connection Started")
-    print(cfg.Postgres.Config)
     cache = RedisClient(cfg.Redis.Host, cfg.Redis.Port, cfg.Redis.Password)
     loader("Init Redis Connection Completed")
     
