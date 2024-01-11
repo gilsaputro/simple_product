@@ -36,15 +36,24 @@ class ProductController:
         if price <= 0 or quantity <= 0:
             return jsonify({'error': 'Price and quantity must be greater than or equal to 0.'}), 400
 
-        product = self.product_usecase.create_product(product_name, price, description, quantity)
-        return jsonify(self.serialize_product(product))
-    
+        try:
+            product = self.product_usecase.create_product(product_name, price, description, quantity)
+            if product:
+                return jsonify(self.serialize_product(product))
+            else:
+                return jsonify({"error": "Failed to create product"}), 400
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+            
     def get_product(self, product_id):
-        product = self.product_usecase.get_product(product_id)
-        if product:
-            return jsonify(self.serialize_product(product))
-        else:
-            return jsonify({"error": "Product not found"}), 404
+        try:
+            product = self.product_usecase.get_product(product_id)
+            if product:
+                return jsonify(self.serialize_product(product))
+            else:
+                return jsonify({"error": "Product not found"}), 404
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
     def get_all_products(self):
         sort_by = request.args.get('sort_by', default="created_time")
@@ -53,9 +62,11 @@ class ProductController:
         valid_sort_fields = ['product_name', 'price', 'quantity', 'created_time']
         if sort_by not in valid_sort_fields:
             return jsonify({'error': 'Invalid sort_by field.'}), 400
-        
-        products = self.product_usecase.get_all_products(sort_by, is_ascending)
-        return jsonify([self.serialize_product(product) for product in products])
+        try:
+            products = self.product_usecase.get_all_products(sort_by, is_ascending)
+            return jsonify([self.serialize_product(product) for product in products])
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
     
     def serialize_product(self, product):
         return {
