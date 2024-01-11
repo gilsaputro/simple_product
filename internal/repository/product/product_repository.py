@@ -30,3 +30,13 @@ class ProductRepository:
             )
 
             return query.all()
+    
+    def count_products_with_filter(self, filter_criteria):
+        with self.Session() as session:
+            query = session.query(Product)
+
+            if filter_criteria:
+                for key, value in filter_criteria.items():
+                    if hasattr(Product, key):
+                        query = query.filter(getattr(Product, key) == value)
+            return query.count()
